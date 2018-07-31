@@ -1,6 +1,7 @@
 package players;
 
 import model.Drawing;
+import model.Rectangle;
 import model.Shape;
 import ui.DrawingEditor;
 
@@ -66,15 +67,15 @@ public class DrawingPlayer implements ActionListener {
     private void selectAndPlayShapes() {
         shapesInColumn = drawing.getShapesAtColumn(playingColumn);
 
-        for (Shape shape : lastColumnPlayed) {
-            if (!shapesInColumn.contains(shape)) {
-                shape.unselectAndStopPlaying();
+        for (Shape rectangle : lastColumnPlayed) {
+            if (!shapesInColumn.contains(rectangle)) {
+                rectangle.unselectAndStopPlaying();
             }
         }
 
-        for (Shape shape : shapesInColumn) {
-            if (!lastColumnPlayed.contains(shape)) {
-                shape.selectAndPlay();
+        for (Shape rectangle : shapesInColumn) {
+            if (!lastColumnPlayed.contains(rectangle)) {
+                rectangle.selectAndPlay();
             }
         }
     }

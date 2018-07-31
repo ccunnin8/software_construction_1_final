@@ -3,6 +3,7 @@ package ui;
 
 import model.Drawing;
 import model.Shape;
+import model.Rectangle;
 import sound.MidiSynth;
 import ui.tools.*;
 
@@ -83,13 +84,13 @@ public class DrawingEditor extends JFrame {
 	}
 
 	// MODIFIES: this
-	// EFFECTS:  adds given Shape to currentDrawing
+	// EFFECTS:  adds given Rectangle to currentDrawing
 	public void addToDrawing(Shape f) {
 		currentDrawing.addShape(f);
 	}
 
 	// MODIFIES: this
-	// EFFECTS:  removes given Shape from currentDrawing
+	// EFFECTS:  removes given Rectangle from currentDrawing
 	public void removeFromDrawing(Shape f) {
 		currentDrawing.removeShape(f);
 	}

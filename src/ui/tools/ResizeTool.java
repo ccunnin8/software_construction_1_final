@@ -1,5 +1,6 @@
 package ui.tools;
 
+import model.Rectangle;
 import model.Shape;
 import ui.DrawingEditor;
 
@@ -10,12 +11,12 @@ import java.awt.event.MouseEvent;
 
 public class ResizeTool extends Tool {
 
-	private Shape shapeToResize;
+	private Shape rectangleToResize;
 
-    // EFFECTS: creates a new ResizeTool with the given editor and parent. Sets shapeToResize to null
+    // EFFECTS: creates a new ResizeTool with the given editor and parent. Sets rectangleToResize to null
 	public ResizeTool(DrawingEditor editor, JComponent parent) {
 		super(editor, parent);
-		shapeToResize = null;
+		rectangleToResize = null;
 	}
 
     // MODIFIES: this
@@ -38,9 +39,9 @@ public class ResizeTool extends Tool {
 	//           selects the shape and plays it
 	@Override
 	public void mousePressedInDrawingArea(MouseEvent e) {
-		shapeToResize = editor.getShapeInDrawing(e.getPoint());
-		if (shapeToResize != null) {
-			shapeToResize.selectAndPlay();
+		rectangleToResize = editor.getShapeInDrawing(e.getPoint());
+		if (rectangleToResize != null) {
+			rectangleToResize.selectAndPlay();
 		}
 	}
 
@@ -48,18 +49,18 @@ public class ResizeTool extends Tool {
     // EFFECTS: deselects the resized shape, sets the shape to resize to null
 	@Override
 	public void mouseReleasedInDrawingArea(MouseEvent e) {
-		if (shapeToResize != null) {
-			shapeToResize.unselectAndStopPlaying();
-			shapeToResize = null;
+		if (rectangleToResize != null) {
+			rectangleToResize.unselectAndStopPlaying();
+			rectangleToResize = null;
 		}
     }
 
     // MODIFIES: this
-    // EFFECTS: resizes shapeToResize to drag release point
+    // EFFECTS: resizes rectangleToResize to drag release point
 	@Override
 	public void mouseDraggedInDrawingArea(MouseEvent e) {
-		if (shapeToResize != null) {
-			shapeToResize.setBounds(e.getPoint());
+		if (rectangleToResize != null) {
+			rectangleToResize.setBounds(e.getPoint());
 		}
 	}
 

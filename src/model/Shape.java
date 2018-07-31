@@ -1,44 +1,36 @@
 package model;
 
-
 import sound.MidiSynth;
 
 import java.awt.*;
 
+public abstract class Shape {
+    protected static final Color PLAYING_COLOR = new Color(230, 9, 21);
+    protected int x;
+    protected int y;
+    protected int width;
+    protected int height;
+    protected boolean selected;
+    protected MidiSynth midiSynth;
+    protected int instrument;
+    protected int playLineCoord;
 
-public class Shape {
-
-    private static final Color PLAYING_COLOR = new Color(230, 9, 21);
-
-    private int x;
-    private int y;
-    private int width;
-    private int height;
-    private boolean selected;
-    private MidiSynth midiSynth;
-    private int instrument;
-    private int playLineCoord;
-
-    public Shape(Point topLeft, MidiSynth midiSynth) {
-        this((int) topLeft.getX(), (int) topLeft.getY(), 0, 0);  // note to students: calls the other constructor!
-        selected = false;
-        this.midiSynth = midiSynth;
-        instrument = 0;
-        playLineCoord = 0;
-    }
-
-    public Shape(int x, int y, int w, int h) {
-        this.x = x;
+    public Shape(int h, int y, int w, int x) {
+        height = h;
         this.y = y;
         width = w;
-        height = h;
+        this.x = x;
     }
 
     // getters
     public int getWidth() { return width; }
+
     public int getXCoord() { return x; }
+
     public int getYCoord() { return y; }
+
     public int getHeight() { return height; }
+
     public boolean isSelected() { return selected; }
 
     // setters
@@ -56,13 +48,6 @@ public class Shape {
         return (this.y <= y) && (y <= this.y + height);
     }
 
-    // EFFECTS: return true if the given Point (x,y) is contained within the bounds of this Shape
-    public boolean contains(Point point) {
-        int point_x = point.x;
-        int point_y = point.y;
-
-        return containsX(point_x) && containsY(point_y);
-    }
 
     // REQUIRES: the x,y coordinates of the Point are larger than the x,y coordinates of the shape
     // MODIFIES: this
@@ -72,25 +57,6 @@ public class Shape {
         height = bottomRight.y - y;
     }
 
-    // EFFECTS: draws this Shape on the SimpleDrawingPlayer, if the shape is selected, Shape is filled in
-    //          else, Shape is unfilled (white)
-    public void draw(Graphics g) {
-        Color save = g.getColor();
-        if (selected) {
-            g.setColor(PLAYING_COLOR);
-        } else {
-            g.setColor(Color.white);
-        }
-        g.fillRect(x, y, width, height);
-        g.setColor(save);
-        g.drawRect(x, y, width, height);
-
-        if (playLineCoord > 0 && playLineCoord < width) {
-            g.setColor(Color.red);
-            g.drawLine(x + playLineCoord, y, x + playLineCoord, y + height);
-            g.setColor(save);
-        }
-    }
 
     // MODIFIES: this
     // EFFECTS:  adds dx to the shape's x coordinate, and dy to the shape's y coordinate.
@@ -132,7 +98,7 @@ public class Shape {
         midiSynth.play(instrument, coordToNote(y), volume);
     }
 
-    // EFFECTS: stops playing this Shape
+    // EFFECTS: stops playing this Shaoe
     private void stopPlaying() {
         midiSynth.stop(instrument, coordToNote(y));
     }
@@ -149,5 +115,9 @@ public class Shape {
         return 70 - y / 12;
     }
 
+    // EFFECTS: draws the shape
+    public abstract void draw(Graphics g);
 
+    // EFFECTS: returns true if point is within shape
+    public abstract boolean contains(Point p);
 }

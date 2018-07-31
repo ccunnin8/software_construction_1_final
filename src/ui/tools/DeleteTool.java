@@ -1,5 +1,6 @@
 package ui.tools;
 
+
 import model.Shape;
 import ui.DrawingEditor;
 
@@ -14,7 +15,7 @@ public class DeleteTool extends Tool {
 
 	public DeleteTool(DrawingEditor editor, JComponent parent) {
 		super(editor, parent);
-		shapeToDelete = null;
+		button = null;
 	}
 
     // MODIFIES: this
