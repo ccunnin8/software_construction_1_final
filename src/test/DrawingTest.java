@@ -2,6 +2,7 @@ package test;
 
 import model.Drawing;
 import model.Rectangle;
+import model.Shape;
 import org.junit.Before;
 import org.junit.Test;
 import sound.MidiSynth;
@@ -12,46 +13,38 @@ import static junit.framework.TestCase.assertFalse;
 import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 
-public class DrawingTest {
+public abstract class DrawingTest {
 
-    private Drawing testDrawing;
-    private Rectangle testRectangle1, testRectangle2;
+    protected Drawing testDrawing;
+    protected Shape shape1, shape2;
 
-    @Before
-    public void setUp() {
-        MidiSynth synth = new MidiSynth();
-        synth.open();
-        testDrawing = new Drawing();
-        testRectangle1 = new Rectangle(new Point(1, 1), synth);
-        testRectangle2 = new Rectangle(1, 3 , 5, 10);
-    }
 
     @Test
     public void testGetters() {
-        assertEquals(0, testDrawing.getRectangles().size());
+        assertEquals(0, testDrawing.getShapes().size());
         testDrawing.setPlayLineColumn(5);
         assertEquals(5, testDrawing.getPlayLineColumn());
     }
 
     @Test
     public void testaddShape() {
-        assertEquals(0, testDrawing.getRectangles().size());
-        testDrawing.addShape(testRectangle1);
-        assertEquals(1, testDrawing.getRectangles().size());
-        assertTrue(testDrawing.containsShape(testRectangle1));
-        testDrawing.addShape(testRectangle2);
-        assertEquals(2, testDrawing.getRectangles().size());
-        assertTrue(testDrawing.containsShape(testRectangle1) && testDrawing.containsShape(testRectangle2));
+        assertEquals(0, testDrawing.getShapes().size());
+        testDrawing.addShape(shape1);
+        assertEquals(1, testDrawing.getShapes().size());
+        assertTrue(testDrawing.containsShape(shape1));
+        testDrawing.addShape(shape2);
+        assertEquals(2, testDrawing.getShapes().size());
+        assertTrue(testDrawing.containsShape(shape1) && testDrawing.containsShape(shape2));
     }
 
     @Test
     public void testremoveShape() {
-        assertEquals(0, testDrawing.getRectangles().size());
-        testDrawing.addShape(testRectangle1);
-        assertTrue(testDrawing.containsShape(testRectangle1));
-        testDrawing.removeShape(testRectangle1);
-        assertFalse(testDrawing.containsShape(testRectangle1));
-        assertEquals(0, testDrawing.getRectangles().size());
+        assertEquals(0, testDrawing.getShapes().size());
+        testDrawing.addShape(shape1);
+        assertTrue(testDrawing.containsShape(shape1));
+        testDrawing.removeShape(shape1);
+        assertFalse(testDrawing.containsShape(shape1));
+        assertEquals(0, testDrawing.getShapes().size());
     }
 
     @Test
@@ -63,7 +56,7 @@ public class DrawingTest {
             testDrawing.addShape(new Rectangle(new Point(i, j), synth));
             j++;
         }
-        assertEquals(500000, testDrawing.getRectangles().size());
+        assertEquals(500000, testDrawing.getShapes().size());
     }
 
     @Test
@@ -88,16 +81,11 @@ public class DrawingTest {
             testDrawing.addShape(bigRectangle);
             j++;
         }
-        assertEquals(500000, testDrawing.getRectangles().size());
+        assertEquals(500000, testDrawing.getShapes().size());
     }
 
     @Test
-    public void testGetShapesAtPoint() {
-        testRectangle1.setBounds(new Point(4, 2));
-        testDrawing.addShape(testRectangle1);
-        assertEquals(testRectangle1, testDrawing.getShapesAtPoint(new Point(1, 1)));
-        assertEquals(null, testDrawing.getShapesAtPoint(new Point(1, 4)));
-    }
+    public void testGetShapesAtPoint() { }
 
 
 }
