@@ -29,7 +29,7 @@ public class PlayShapeTool extends Tool {
     //           parent passed to this method
     @Override
     protected void createButton(JComponent parent) {
-        button = new JButton("Play Rectangle");
+        button = new JButton("Play Shape");
         button = customizeButton(button);
         addToParent(parent);
     }

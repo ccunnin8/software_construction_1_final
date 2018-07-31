@@ -22,4 +22,12 @@ public class OvalTool extends ShapeTool
         shape.setBounds(e.getPoint());
         editor.addToDrawing(shape);
     }
+
+    // MODIFIES: this
+    // EFFECTS:  creates new button and adds to parent
+    @Override
+    protected void createButton(JComponent parent) {
+        button = new JButton("Oval");
+        button = customizeButton(button);
+    }
 }

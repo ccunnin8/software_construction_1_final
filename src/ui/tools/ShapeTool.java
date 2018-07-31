@@ -11,19 +11,18 @@ import java.awt.event.MouseEvent;
 
 public abstract class ShapeTool extends Tool {
     protected Shape shape;
-    protected String name;
+
 
     public ShapeTool(DrawingEditor editor, JComponent parent, String name) {
         super(editor, parent);
         shape = null;
-        this.name = name;
     }
 
     // MODIFIES: this
     // EFFECTS:  creates new button and adds to parent
 	@Override
 	protected void createButton(JComponent parent) {
-		button = new JButton(name);
+		button = new JButton(this.name);
 		button = customizeButton(button);
 	}
 
@@ -35,15 +34,10 @@ public abstract class ShapeTool extends Tool {
 	}
 
     // MODIFIES: this
-    // EFFECTS:  a rectangle is instantiate MouseEvent occurs, and played and
+    // EFFECTS:  a shape is instantiate MouseEvent occurs, and played and
     //           added to the editor's drawing
 	@Override
-	public void mousePressedInDrawingArea(MouseEvent e) {
-		shape = new Oval(e.getPoint(), editor.getMidiSynth());
-		shape.selectAndPlay();
-		shape.setBounds(e.getPoint());
-		editor.addToDrawing(shape);
-	}
+	public void mousePressedInDrawingArea(MouseEvent e) {}
 
     // MODIFIES: this
     // EFFECTS:  unselects this rectangle, and sets it to null

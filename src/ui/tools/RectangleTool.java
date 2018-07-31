@@ -23,4 +23,11 @@ public class RectangleTool extends ShapeTool {
         editor.addToDrawing(shape);
     }
 
+    // MODIFIES: this
+    // EFFECTS:  creates new button and adds to parent
+    @Override
+    protected void createButton(JComponent parent) {
+        button = new JButton("Rectangle");
+        button = customizeButton(button);
+    }
 }

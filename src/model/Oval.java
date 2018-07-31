@@ -14,11 +14,11 @@ public class Oval extends Shape {
         playLineCoord = 0;
     }
 
-    public Oval(int h, int y, int w, int x) {
+    public Oval(int x, int y, int w, int h) {
         super(h, y, w, x);
     }
 
-    // EFFECTS: draws this Rectangle on the SimpleDrawingPlayer, if the retangle is selected, rectangle is filled in
+    // EFFECTS: draws this Oval on the SimpleDrawingPlayer, if the retangle is selected, rectangle is filled in
     //          else, rectangle is unfilled (white)
     public void draw(Graphics g) {
         Color save = g.getColor();

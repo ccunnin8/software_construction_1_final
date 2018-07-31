@@ -11,7 +11,7 @@ public abstract class Tool {
 
 	protected JButton button;
 	protected DrawingEditor editor;
-
+    protected String name;
 	private boolean active;
 
 	public Tool(DrawingEditor editor, JComponent parent) {
